@@ -1,0 +1,14 @@
+[
+  {
+    "url": "#clock1",
+    "image": "https://via.placeholder.com/400x250.png?text=時間工具1",
+    "title": "世界時鐘",
+    "description": "全球主要城市時區顯示。"
+  },
+  {
+    "url": "#clock2",
+    "image": "https://via.placeholder.com/400x250.png?text=時間工具2",
+    "title": "倒數計時器",
+    "description": "設定特定事件的倒數計時。"
+  }
+]
