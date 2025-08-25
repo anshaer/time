@@ -1,0 +1,14 @@
+[
+  {
+    "url": "#general1",
+    "image": "https://via.placeholder.com/400x250.png?text=一般工具1",
+    "title": "計算機工具",
+    "description": "各種數學與工程計算工具。"
+  },
+  {
+    "url": "#general2",
+    "image": "https://via.placeholder.com/400x250.png?text=一般工具2",
+    "title": "單位轉換器",
+    "description": "長度、重量、溫度等單位快速轉換。"
+  }
+]
