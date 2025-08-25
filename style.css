@@ -1,0 +1,72 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background: #333;
+    color: #fff;
+    padding: 1rem 0;
+    text-align: center;
+}
+
+nav a {
+    color: #fff;
+    margin: 0 15px;
+    text-decoration: none;
+}
+
+main {
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.subpage-item {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.subpage-item:hover {
+    transform: translateY(-5px);
+}
+
+.subpage-item a {
+    text-decoration: none;
+    color: #333;
+    display: block;
+}
+
+.subpage-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+.subpage-info {
+    padding: 15px;
+}
+
+.subpage-info h3 {
+    margin: 0 0 10px;
+    font-size: 1.2rem;
+}
+
+.subpage-info p {
+    margin: 0;
+    color: #666;
+}
+
+/* 圖片的懶加載樣式，可以讓圖片在載入前顯示一個占位符 */
+.lazy-loading {
+    background-color: #e0e0e0;
+    min-height: 150px; /* 預設高度，避免版面跳動 */
+}
