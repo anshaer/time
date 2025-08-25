@@ -1,4 +1,3 @@
-// 創建一個 Intersection Observer 實例，用於圖片懶加載
 const observer = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -15,11 +14,10 @@ const observer = new IntersectionObserver((entries, observer) => {
     });
 });
 
-// 根據傳入的資料陣列動態生成子頁面區塊
-function renderSubpages(subpages) {
-    const contentContainer = document.getElementById('content');
-    contentContainer.innerHTML = ''; // 先清空舊內容
-
+function renderSubpages(subpages, containerId) {
+    const container = document.getElementById(containerId);
+    container.innerHTML = '';
+    
     subpages.forEach(page => {
         const itemDiv = document.createElement('div');
         itemDiv.classList.add('subpage-item');
@@ -48,27 +46,52 @@ function renderSubpages(subpages) {
         link.appendChild(infoDiv);
 
         itemDiv.appendChild(link);
-        contentContainer.appendChild(itemDiv);
+        container.appendChild(itemDiv);
 
         observer.observe(img);
     });
 }
 
-// 使用 fetch API 讀取 data.json 檔案
-async function fetchAndRenderData() {
-    try {
-        const response = await fetch('data.json');
-        if (!response.ok) {
-            throw new Error(`HTTP 錯誤! 狀態碼: ${response.status}`);
+// 處理分頁切換的函式
+async function handleTabClick(event) {
+    event.preventDefault();
+
+    const navLinks = document.querySelectorAll('nav a');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    // 移除所有 active 樣式
+    navLinks.forEach(link => link.classList.remove('active'));
+    tabContents.forEach(content => content.classList.remove('active'));
+
+    // 為點擊的連結和對應的內容區塊加上 active 樣式
+    const targetLink = event.target;
+    const targetHref = targetLink.getAttribute('href').substring(1);
+    const targetContent = document.getElementById(targetHref);
+
+    targetLink.classList.add('active');
+    targetContent.classList.add('active');
+
+    // 根據 data-json 屬性來決定是否需要載入 JSON 資料
+    const jsonFile = targetLink.getAttribute('data-json');
+    if (jsonFile && jsonFile !== 'home') {
+        try {
+            const response = await fetch(jsonFile);
+            if (!response.ok) {
+                throw new Error(`HTTP 錯誤! 狀態碼: ${response.status}`);
+            }
+            const data = await response.json();
+            renderSubpages(data, `${targetHref}-container`);
+        } catch (error) {
+            console.error(`讀取 ${jsonFile} 時發生錯誤:`, error);
+            document.getElementById(`${targetHref}-container`).innerHTML = '<p>讀取資料失敗，請稍後再試。</p>';
         }
-        const subpages = await response.json();
-        renderSubpages(subpages);
-    } catch (error) {
-        console.error('讀取資料時發生錯誤:', error);
-        // 你可以在這裡顯示錯誤訊息給使用者
-        document.getElementById('content').innerHTML = '<p>讀取資料失敗，請稍後再試。</p>';
     }
 }
 
-// 在網頁載入完成後執行
-window.addEventListener('DOMContentLoaded', fetchAndRenderData);
+// 在網頁載入完成後，為所有導覽連結添加點擊事件
+document.addEventListener('DOMContentLoaded', () => {
+    const navLinks = document.querySelectorAll('nav a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', handleTabClick);
+    });
+});
