@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "canvas": {
+    "w": 700,
+    "h": 300,
+    "bg": "transparent"
+  },
+  "layers": [
+    {
+      "type": "time",
+      "name": "動態時鐘",
+      "x": 40,
+      "y": 30,
+      "format": "HH:mm:ss",
+      "size": 90,
+      "color": "#ffffff",
+      "timeEffect": "fade"
+    },
+    {
+      "type": "date",
+      "name": "日期",
+      "x": 40,
+      "y": 145,
+      "format": "YYYY.MM.DD",
+      "size": 32,
+      "color": "#aadcff"
+    },
+    {
+      "type": "weekday",
+      "name": "星期",
+      "x": 40,
+      "y": 230,
+      "format": "wk",
+      "size": 28,
+      "color": "#ffffff"
+    },
+    {
+      "type": "image",
+      "name": "輪播底板",
+      "file": "images/panel.png",
+      "x": 0,
+      "y": 0,
+      "w": 700,
+      "h": 300,
+      "fx": {
+        "swap": true,
+        "swapInterval": 5,
+        "swapDuration": 1,
+        "swapMode": "fade",
+        "images": [
+          {
+            "file": "images/panel_alt.png"
+          }
+        ]
+      }
+    }
+  ]
+}
